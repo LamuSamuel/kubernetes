@@ -1,0 +1,91 @@
+# Key value pair syntax
+# space of one char after the colon
+Fruit: banana
+Vegetable: carrot
+liquid: water
+dish: biriyani
+
+
+
+# list
+# ( - indicates that it is an element of the list )
+fruits :
+  - apple
+  - banana
+  - orange
+  - kiwi
+
+# Dictionary :
+# equal number of blank spaces before the properties so that they are all aligned properly together .
+# in the below example name,age and gender fall under person category.
+Person:
+  name: Samuel
+  age: 23
+  gender: Male
+
+
+# the below syntax will be wrong as age and gender fall under name category , so please be mindful
+# invalid
+#Person_:
+#  name: Samuel
+#    age: 23
+#    gender : male
+
+# to store data of a single object we use dictionary :
+
+color: Blue
+car: Ford
+transmission: Manual
+price: $10,000
+
+# dictionary within another dictionary:
+
+color_: Blue
+car_:
+  name: ford
+  year: 2010
+  model: Mustang
+transmission_: Manual
+price_: $20,000
+
+# Use list to store multiple items of same type of object.
+# list of strings
+car color:
+
+  blue_mustang:
+  black_mustang:
+  green_mustang:
+  white_mustang:
+  yellow_mustang:
+  purple_mustang:
+
+
+# storing list of dictionaries
+
+car_color:
+  - color : blue
+    Model:
+      name : Mustang
+      year : 2000
+  - color: green
+    Model:
+      name: Mustang
+      year: 2000
+  - color: red
+    Model:
+      name: Mustang
+      year: 2000
+  - color: white
+    Model:
+      name: Mustang
+      year: 2000
+  - color: orange
+    Model:
+      name: Mustang
+      year: 2000
+  - color: purple
+    Model:
+      name: Mustang
+      year: 2000
+
+# observation : dictionaries - unordered data , list - ordered data

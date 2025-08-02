@@ -1,0 +1,74 @@
+### Replication Controller : In the pod.yaml code we are only deploying one Pod. but in production this is not a healthy practise,
+### if one pod goes down then the application is down. so in order to overcome this issue we need to replicate our pods so that even though one die, the other pod will be helping to keep the application active.
+### Replication Controller helps us to run multiple instances of a pod in a kubernetes cluster , thus providing high availability. Does it mean you should always have 2 pods ? the ans is no,even though you have 1 pod.
+### replication controller helps in bringing up the pod when its dead, and it also helps in Load balancing and scaling.
+### for example: one pod serves 1000 users , suddenly there is a spike in the usage which lands 10k users for your website , so is your app down now ? how to handle this , simple ans : replication controller
+### if demand further increases and there is no additional resources in the node , then we deploy another node and replicate our pod to bring application for the users .
+# Replication controller is the older technology that is being replaced by the Replica set .
+
+apiVersion: v1
+kind: ReplicationController
+metadata: # this is for the rc
+  name: nginx-pod-rc
+  labels:
+    name: sam-pod
+    env: prod
+spec: # this is for the rc
+  template:
+    metadata: # this is for the pod
+      name: nginx-pod
+      labels:
+        name: sam-pod
+        env: prod
+    spec: # this is for the pod
+      containers:
+        - name: nginx
+          image: nginx
+  replicas: 2
+---
+# we have nested two configs,the rc being the parent and the pod being the child
+#  kubectl get replicationcontroller
+# kubectl get pods
+# the only difference between the replica set and replication factor is the version type and selector definition.
+# the selector helps in managing the pods that were not created during the replica set deployment. say for example you created a pod with same labels and matches the selector of the replica set then the new replicaset will also take ownership.
+# Now lets also see the replica set
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-pod-rs
+  labels:
+    name: sam-pod
+    env: prod
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        name: sam-pod
+        env: prod
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+  replicas: 2
+  selector:
+    matchLabels:
+      type: sam-pod
+
+
+# commands
+
+# kubectl create -f replicationcontroller.yaml
+
+# kubectl get replicaset
+
+# kubectl delete replicaset <replica-set>
+
+# kubectl replace -f replicationcontroller.yaml
+
+# kubectl scale -replicas=6 -f replicationcontroller.yaml
+
+
+
+
+
