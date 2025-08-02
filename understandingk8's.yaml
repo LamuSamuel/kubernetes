@@ -1,0 +1,27 @@
+# kubernetes has 4 top level fields in a yaml file they are
+
+apiVersion: v1 #Depending on what we are trying to create , we must use right api version.
+  # various api version for various resources :
+  #  Pod: v1
+  #  Service: v1
+  # ReplicaSet : apps/v1
+  # Deployment: apps/v1
+Kind: Deployment #Refers to the kind of object we are willing to create
+
+    # various kinds are :
+    # Pod, Service , ReplicaSet, Deployment
+Metadata: #Data about the object.
+  name: app
+  labels :
+    app : myapp
+    type: front-end
+      # name , labels etc .
+      # mosty type dictionary
+
+
+spec: # this section  defines the desired state and configuration for a Kubernetes resource.
+      # It includes configurations like containers, replicas, ports, and storage for Pods or Services.
+  containers:
+    - name: nginx-container
+      image: nginx
+# these are the top level or root level properties in a yaml file.
